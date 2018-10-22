@@ -22,6 +22,7 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 
 ## Features
 
+* [x] Return `browse` function that returns URL usable in a browser. (Similar to [`hosted-git-info`](https://github.com/npm/hosted-git-info/blob/5d2cc4a8c93012387a86a0afa1384ccf7ac31084/README.md#methods))
 * [x] Return `domain` property containing the fully qualified domain name and port.
 * [x] Return `project` property.
 * [x] Return `type` property indicating the SCM host, such as `github` or `gitlab`.
@@ -49,7 +50,8 @@ parseRepositoryURL(`https://gitlab.com/hyper-expanse/open-source/parse-repositor
 parseRepositoryURL(`https://git.example.com/hyper-expanse/open-source/parse-repository-url`);
 
 // {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
-parseRepositoryURL(`git@gitlab.com/hyper-expanse/open-source/parse-repository-url`);
+const repository = parseRepositoryURL(`git@gitlab.com/hyper-expanse/open-source/parse-repository-url`);
+repository.browse(); // https://gitlab.com/hyper-expanse/open-source/parse-repository-url
 
 // {domain: `github.com`, project: `project`, type: `github`, user: `user`}
 parseRepositoryURL(`https://github.com/user/project`);

@@ -15,22 +15,23 @@ module.exports = url => {
     .replace(/\.git$/, ``);
 
   const parsedURL = parse(modifiedURL);
+  const format = matches => {
+    return {browse: createBrowseURL(parsedURL, matches), domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
+  };
 
   if (parsedURL.host) {
     if (parsedURL.host.includes(`api.github.com`)) {
       const matches = GITHUB_API.exec(parsedURL.pathname) || [];
-      return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
+      return format(matches);
     }
 
     if (parsedURL.host.includes(`codeload.github.com`)) {
       const matches = GITHUB_CODELOAD.exec(parsedURL.pathname) || [];
-      return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
+      return format(matches);
     }
   }
 
-  const matches = URL_PATTERNS.exec(parsedURL.pathname) || [];
-
-  return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
+  return format(URL_PATTERNS.exec(parsedURL.pathname) || []);
 };
 
 function getType(url) {
@@ -41,4 +42,13 @@ function getType(url) {
     return 'gitlab';
   }
   return null;
+}
+
+function createBrowseURL(parsedURL, matches) {
+  const protocol = parsedURL.protocol === `http:` ? `http:` : `https:`;
+  const browseURL = `${protocol}//${parsedURL.host}/${matches[1]}/${matches[2]}`;
+
+  return () => {
+    return browseURL;
+  };
 }

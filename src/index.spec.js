@@ -27,12 +27,17 @@ describe(`parse-repository-url`, () => {
 
     // Not specifying a transport protocol.
     `git@github.com:user/project.git`,
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
-    domain: 'github.com',
-    project: `project`,
-    type: 'github',
-    user: `user`,
-  })));
+  ].forEach(url => it(url, () => {
+    const parsedURL = parseRepositoryURL(url);
+
+    expect(parsedURL).to.contain({
+      domain: 'github.com',
+      project: `project`,
+      type: 'github',
+      user: `user`,
+    });
+    expect(parsedURL.browse()).to.equal(`https://github.com/user/project`);
+  }));
 
   [
     // GitLab long-form.
@@ -43,12 +48,17 @@ describe(`parse-repository-url`, () => {
 
     // Not specifying a transport protocol.
     `git@gitlab.com:user/project.git`,
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
-    domain: 'gitlab.com',
-    project: `project`,
-    type: 'gitlab',
-    user: `user`,
-  })));
+  ].forEach(url => it(url, () => {
+    const parsedURL = parseRepositoryURL(url);
+
+    expect(parsedURL).to.contain({
+      domain: 'gitlab.com',
+      project: `project`,
+      type: 'gitlab',
+      user: `user`,
+    });
+    expect(parsedURL.browse()).to.equal(`https://gitlab.com/user/project`);
+  }));
 
   [
     // GitHub long-form.
