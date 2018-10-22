@@ -18,17 +18,27 @@ module.exports = url => {
 
   if (parsedURL.host) {
     if (parsedURL.host.includes(`api.github.com`)) {
-      const matches = GITHUB_API.exec(parsedURL.pathname);
-      return matches ? {user: matches[1], project: matches[2]} : null;
+      const matches = GITHUB_API.exec(parsedURL.pathname) || [];
+      return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
     }
 
     if (parsedURL.host.includes(`codeload.github.com`)) {
-      const matches = GITHUB_CODELOAD.exec(parsedURL.pathname);
-      return matches ? {user: matches[1], project: matches[2]} : null;
+      const matches = GITHUB_CODELOAD.exec(parsedURL.pathname) || [];
+      return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
     }
   }
 
-  const matches = URL_PATTERNS.exec(parsedURL.pathname);
+  const matches = URL_PATTERNS.exec(parsedURL.pathname) || [];
 
-  return matches ? {user: matches[1], project: matches[2]} : null;
+  return {domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
 };
+
+function getType(url) {
+  if (url.indexOf(`github`) !== -1) {
+    return 'github';
+  }
+  if (url.indexOf(`gitlab`) !== -1) {
+    return 'gitlab';
+  }
+  return null;
+}

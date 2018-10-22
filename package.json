@@ -6,7 +6,7 @@
   },
   "bin": {},
   "bugs": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url/issues",
-  "description": "Parse repository URLs to extract user and project information.",
+  "description": "Parse repository URLs to extract, SCM platform, domain, user, and project information.",
   "engines": {
     "node": ">=6.9.0"
   },

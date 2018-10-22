@@ -1,6 +1,6 @@
 # @hbetts/parse-repository-url
 
-> Parse repository URLs to extract user and project information.
+> Parse repository URLs to extract, SCM platform, domain, user, and project information.
 
 Occasionally you need to take a Git repository URL, such as `https://gitlab.com/gitlab-org/gitlab-ce` and extract the user/group and project name from the URL for use in other tools and processes.
 
@@ -22,7 +22,12 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 
 ## Features
 
-* [x] Return `user` and `project` information or `null`.
+* [x] Return `domain` property containing the fully qualified domain name and port.
+* [x] Return `project` property.
+* [x] Return `type` property indicating the SCM host, such as `github` or `gitlab`.
+* [x] Return `user` property.
+
+> **Note:* Returns `null` for any property where the information could not be extracted from the repository URL.
 
 ## Installation
 
@@ -37,20 +42,25 @@ yarn add [--dev] @hbetts/parse-repository-url
 ```javascript
 const parseRepositoryURL = require(`@hbetts/parse-github-repository`);
 
-// All the following examples return:
-//   {user: `hyper-expanse/open-source`, project: `parse-repository-url`}
-
+// {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
 parseRepositoryURL(`https://gitlab.com/hyper-expanse/open-source/parse-repository-url`);
+
+// {domain: `git.example.com`, project: `parse-repository-url`, type: null, user: `hyper-expanse/open-source`}
 parseRepositoryURL(`https://git.example.com/hyper-expanse/open-source/parse-repository-url`);
+
+// {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
 parseRepositoryURL(`git@gitlab.com/hyper-expanse/open-source/parse-repository-url`);
 
-// All the following examples return:
-//   {user: `user`, project: `project`}
+// {domain: `github.com`, project: `project`, type: `github`, user: `user`}
 parseRepositoryURL(`https://github.com/user/project`);
+
+// {domain: `git.example.com`, project: `project`, type: null, user: `user`}
 parseRepositoryURL(`https://git.example.com/user/project`);
+
+// {domain: `github.com`, project: `project`, type: `github`, user: `user`}
 parseRepositoryURL(`git@github.com/user/project`);
 
-// When an invalid URL string is encountered `null` is returned.
+// // {domain: `somewhere`, project: null, type: null, user: null}
 parseRepositoryURL(`https://somewhere`);
 ```
 
