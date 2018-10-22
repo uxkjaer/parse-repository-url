@@ -62,7 +62,7 @@ parseRepositoryURL(`https://git.example.com/user/project`);
 // {domain: `github.com`, project: `project`, type: `github`, user: `user`}
 parseRepositoryURL(`git@github.com/user/project`);
 
-// // {domain: `somewhere`, project: null, type: null, user: null}
+// {domain: `somewhere`, project: null, type: null, user: null}
 parseRepositoryURL(`https://somewhere`);
 ```
 
