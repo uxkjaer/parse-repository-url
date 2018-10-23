@@ -16,7 +16,7 @@ module.exports = url => {
 
   const parsedURL = parse(modifiedURL);
   const format = matches => {
-    return {browse: createBrowseURL(parsedURL, matches), domain: parsedURL.host, project: matches[2] || null, type: getType(url), user: matches[1] || null};
+    return {browse: createBrowseURL(parsedURL, matches), domain: parsedURL.host, project: matches[2] || null, type: getType(parsedURL), user: matches[1] || null};
   };
 
   if (parsedURL.host) {
@@ -34,13 +34,18 @@ module.exports = url => {
   return format(URL_PATTERNS.exec(parsedURL.pathname) || []);
 };
 
-function getType(url) {
-  if (url.indexOf(`github`) !== -1) {
+function getType(parsedURL) {
+  if (typeof parsedURL.host !== `string`) {
+    return null;
+  }
+
+  if (parsedURL.host.indexOf(`github`) !== -1) {
     return 'github';
   }
-  if (url.indexOf(`gitlab`) !== -1) {
+  if (parsedURL.host.indexOf(`gitlab`) !== -1) {
     return 'gitlab';
   }
+
   return null;
 }
 

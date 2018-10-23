@@ -277,6 +277,28 @@ describe(`parse-repository-url`, () => {
   })));
 
   [
+    // Self-hosted platform of unknown type where the platform name, such as `gitlab` is in the project name.
+    `https://git.example.net/user/gitlab`,
+    `https://git.example.net/user/gitlab.git`,
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
+    domain: 'git.example.net',
+    project: `gitlab`,
+    type: null,
+    user: `user`,
+  })));
+
+  [
+    // Self-hosted platform of unknown type where the platform name, such as `gitlab` is in the project name.
+    `https://git.example.net/user/github`,
+    `https://git.example.net/user/github.git`,
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
+    domain: 'git.example.net',
+    project: `github`,
+    type: null,
+    user: `user`,
+  })));
+
+  [
     `https://git.example.net:8080/user/project.git`,
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net:8080',
