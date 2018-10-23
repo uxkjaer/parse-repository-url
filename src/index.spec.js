@@ -19,6 +19,19 @@ describe(`parse-repository-url`, () => {
   })));
 
   [
+    `git@gitlab.com/really-long-group/with-really-long-sub-group/and-a-really-long-project-name.git`,
+  ].forEach(url => it(url, () => {
+    const parsedURL = parseRepositoryURL(url);
+
+    expect(parsedURL).to.contain({
+      domain: 'gitlab.com',
+      project: `and-a-really-long-project-name`,
+      type: 'gitlab',
+      user: `really-long-group/with-really-long-sub-group`,
+    });
+  }));
+
+  [
     // GitHub long-form.
     `https://github.com/user/project`,
     `https://github.com/user/project/`,
@@ -47,6 +60,7 @@ describe(`parse-repository-url`, () => {
     `git://gitlab.com/user/project.git`,
 
     // Not specifying a transport protocol.
+    `git@gitlab.com/user/project.git`,
     `git@gitlab.com:user/project.git`,
   ].forEach(url => it(url, () => {
     const parsedURL = parseRepositoryURL(url);
@@ -363,6 +377,7 @@ describe(`parse-repository-url`, () => {
     `git://gitlab.example.net/user/sub-group/project.git`,
 
     // Not specifying a transport protocol.
+    `git@gitlab.com/user/sub-group/project.git`,
     `git@gitlab.com:user/sub-group/project.git`,
     `git@gitlab.example.com:user/sub-group/project.git`,
     `git@gitlab.example.net:user/sub-group/project.git`,
@@ -388,6 +403,7 @@ describe(`parse-repository-url`, () => {
     `git://gitlab.example.net/user/sub-group1/sub-group2/project.git`,
 
     // Not specifying a transport protocol.
+    `git@gitlab.com/user/sub-group1/sub-group2/project.git`,
     `git@gitlab.com:user/sub-group1/sub-group2/project.git`,
     `git@gitlab.example.com:user/sub-group1/sub-group2/project.git`,
     `git@gitlab.example.net:user/sub-group1/sub-group2/project.git`,

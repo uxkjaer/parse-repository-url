@@ -2,7 +2,7 @@
 
 const {parse} = require(`url`);
 
-const URL_PATTERNS = new RegExp(/^\/?:?((?:[/\w-.]+)+)\/([\w-.]+)\/?$/);
+const URL_PATTERNS = new RegExp(/^\/?:?([/\w-.]+)\/([\w-.]+)\/?$/);
 const GITHUB_API = new RegExp(/^\/repos\/([\w-.]+)\/([\w-.]+)\/(?:tarball|zipball)(?:\/.+)?$/);
 const GITHUB_CODELOAD = new RegExp(/^\/([\w-.]+)\/([\w-.]+)\/(?:legacy\.(?:zip|tar\.gz))(?:\/.+)?$/);
 
