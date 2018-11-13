@@ -15,8 +15,8 @@
   ],
   "homepage": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url#readme",
   "keywords": [
-    "repository",
-    "parser"
+    "parser",
+    "repository-url"
   ],
   "license": "Apache-2.0",
   "main": "src/index.js",
