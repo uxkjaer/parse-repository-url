@@ -1,10 +1,10 @@
-# @hbetts/parse-repository-url
+# @hutson/parse-repository-url
 
 > Parse repository URLs to extract, SCM platform, domain, user, and project information.
 
 Occasionally you need to take a Git repository URL, such as `https://gitlab.com/gitlab-org/gitlab-ce` and extract the user/group and project name from the URL for use in other tools and processes.
 
-`@hbetts/parse-repository-url` helps to extract that information from many valid Git URLs strings that you might encounter, including for platforms like GitLab, GitHub, and their various use cases, such as hosted, on-premise, and multiple sub-groups.
+`@hutson/parse-repository-url` helps to extract that information from many valid Git URLs strings that you might encounter, including for platforms like GitLab, GitHub, and their various use cases, such as hosted, on-premise, and multiple sub-groups.
 
 ## Table of Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -32,16 +32,16 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 
 ## Installation
 
-To install the `@hbetts/parse-repository-url` tool for use in your project's publish process please run the following command:
+To install the `@hutson/parse-repository-url` tool for use in your project's publish process please run the following command:
 
 ```bash
-yarn add [--dev] @hbetts/parse-repository-url
+yarn add [--dev] @hutson/parse-repository-url
 ```
 
 ## Usage
 
 ```javascript
-const parseRepositoryURL = require(`@hbetts/parse-github-repository`);
+const parseRepositoryURL = require(`@hutson/parse-github-repository`);
 
 // {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
 parseRepositoryURL(`https://gitlab.com/hyper-expanse/open-source/parse-repository-url`);
@@ -70,18 +70,18 @@ Check out the `index.spec.js` file under the `src/` directory for a full list of
 
 ## Debugging
 
-To assist users of `@hbetts/parse-repository-url` with debugging the behavior of this module we use the [debug](https://www.npmjs.com/package/debug) utility package to print information about the publish process to the console. To enable debug message printing, the environment variable `DEBUG`, which is the variable used by the `debug` package, must be set to a value configured by the package containing the debug messages to be printed.
+To assist users of `@hutson/parse-repository-url` with debugging the behavior of this module we use the [debug](https://www.npmjs.com/package/debug) utility package to print information about the publish process to the console. To enable debug message printing, the environment variable `DEBUG`, which is the variable used by the `debug` package, must be set to a value configured by the package containing the debug messages to be printed.
 
-To print debug messages on a unix system set the environment variable `DEBUG` with the name of this package prior to executing `@hbetts/parse-repository-url`:
+To print debug messages on a unix system set the environment variable `DEBUG` with the name of this package prior to executing `@hutson/parse-repository-url`:
 
 ```bash
-DEBUG=@hbetts/parse-repository-url [CONSUMING TOOL]
+DEBUG=@hutson/parse-repository-url [CONSUMING TOOL]
 ```
 
 On the Windows command line you may do:
 
 ```bash
-set DEBUG=@hbetts/parse-repository-url
+set DEBUG=@hutson/parse-repository-url
 [CONSUMING TOOL]
 ```
 

@@ -20,7 +20,7 @@
   ],
   "license": "Apache-2.0",
   "main": "src/index.js",
-  "name": "@hbetts/parse-repository-url",
+  "name": "@hutson/parse-repository-url",
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url.git"
