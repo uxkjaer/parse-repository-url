@@ -2,24 +2,24 @@
 
 /* eslint-disable no-unused-expressions */
 
-const {expect} = require(`chai`);
-const {describe, it} = require(`mocha`);
+const { expect } = require(`chai`);
+const { describe, it } = require(`mocha`);
 
 const parseRepositoryURL = require(`../`);
 
 describe(`parse-repository-url`, () => {
   [
     // Short form.
-    `user/project`,
+    `user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: null,
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `git@gitlab.com/really-long-group/with-really-long-sub-group/and-a-really-long-project-name.git`,
+    `git@gitlab.com/really-long-group/with-really-long-sub-group/and-a-really-long-project-name.git`
   ].forEach(url => it(url, () => {
     const parsedURL = parseRepositoryURL(url);
 
@@ -27,7 +27,7 @@ describe(`parse-repository-url`, () => {
       domain: 'gitlab.com',
       project: `and-a-really-long-project-name`,
       type: 'gitlab',
-      user: `really-long-group/with-really-long-sub-group`,
+      user: `really-long-group/with-really-long-sub-group`
     });
   }));
 
@@ -39,7 +39,7 @@ describe(`parse-repository-url`, () => {
     `git://github.com/user/project.git`,
 
     // Not specifying a transport protocol.
-    `git@github.com:user/project.git`,
+    `git@github.com:user/project.git`
   ].forEach(url => it(url, () => {
     const parsedURL = parseRepositoryURL(url);
 
@@ -47,7 +47,7 @@ describe(`parse-repository-url`, () => {
       domain: 'github.com',
       project: `project`,
       type: 'github',
-      user: `user`,
+      user: `user`
     });
     expect(parsedURL.browse()).to.equal(`https://github.com/user/project`);
   }));
@@ -61,7 +61,7 @@ describe(`parse-repository-url`, () => {
 
     // Not specifying a transport protocol.
     `git@gitlab.com/user/project.git`,
-    `git@gitlab.com:user/project.git`,
+    `git@gitlab.com:user/project.git`
   ].forEach(url => it(url, () => {
     const parsedURL = parseRepositoryURL(url);
 
@@ -69,7 +69,7 @@ describe(`parse-repository-url`, () => {
       domain: 'gitlab.com',
       project: `project`,
       type: 'gitlab',
-      user: `user`,
+      user: `user`
     });
     expect(parsedURL.browse()).to.equal(`https://gitlab.com/user/project`);
   }));
@@ -79,12 +79,12 @@ describe(`parse-repository-url`, () => {
     `https://www.github.com/user/project`,
     `https://www.github.com/user/project/`,
     `http://www.github.com/user/project`,
-    `http://www.github.com/user/project/`,
+    `http://www.github.com/user/project/`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'www.github.com',
     project: `project`,
     type: 'github',
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -92,80 +92,80 @@ describe(`parse-repository-url`, () => {
     `https://www.gitlab.com/user/project`,
     `https://www.gitlab.com/user/project/`,
     `http://www.gitlab.com/user/project`,
-    `http://www.gitlab.com/user/project/`,
+    `http://www.gitlab.com/user/project/`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'www.gitlab.com',
     project: `project`,
     type: 'gitlab',
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `git@git.example.com:user/project.git`,
+    `git@git.example.com:user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.com',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `git@git.example.com:8080/user/project.git`,
+    `git@git.example.com:8080/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.com:8080',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `git@git.example.net:user/project.git`,
+    `git@git.example.net:user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `git@git.example.net:8080/user/project.git`,
+    `git@git.example.net:8080/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net:8080',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitHub.
-    `https://github.example.com/user/project`,
+    `https://github.example.com/user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github.example.com',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitHub.
-    `https://github.example.com:8080/user/project`,
+    `https://github.example.com:8080/user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github.example.com:8080',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitHub.
     `https://github.example.net/user/project`,
     `https://github.example.net/user/project/`,
-    `https://github.example.net/user/project.git`,
+    `https://github.example.net/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github.example.net',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -173,53 +173,53 @@ describe(`parse-repository-url`, () => {
     `https://www.github.example.net/user/project`,
     `https://www.github.example.net/user/project/`,
     `http://www.github.example.net/user/project`,
-    `http://www.github.example.net/user/project/`,
+    `http://www.github.example.net/user/project/`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'www.github.example.net',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitHub.
-    `git://github.example.net/user/project.git`,
+    `git://github.example.net/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github.example.net',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitLab.
-    `https://gitlab.example.com/user/project`,
+    `https://gitlab.example.com/user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'gitlab.example.com',
     project: `project`,
     type: `gitlab`,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `https://gitlab.example.com:8080/user/project`,
+    `https://gitlab.example.com:8080/user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'gitlab.example.com:8080',
     project: `project`,
     type: `gitlab`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitLab.
     `https://gitlab.example.net/user/project`,
     `https://gitlab.example.net/user/project/`,
-    `https://gitlab.example.net/user/project.git`,
+    `https://gitlab.example.net/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'gitlab.example.net',
     project: `project`,
     type: `gitlab`,
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -227,94 +227,94 @@ describe(`parse-repository-url`, () => {
     `https://www.gitlab.example.net/user/project`,
     `https://www.gitlab.example.net/user/project/`,
     `http://www.gitlab.example.net/user/project`,
-    `http://www.gitlab.example.net/user/project/`,
+    `http://www.gitlab.example.net/user/project/`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'www.gitlab.example.net',
     project: `project`,
     type: `gitlab`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted GitLab.
-    `git://gitlab.example.net/user/project.git`,
+    `git://gitlab.example.net/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'gitlab.example.net',
     project: `project`,
     type: `gitlab`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted platform of unknown type.
     `https://git.example.com/user/project`,
-    `https://git.example.com/user/project.git`,
+    `https://git.example.com/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.com',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `https://git.example.com:8080/user/project.git`,
+    `https://git.example.com:8080/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.com:8080',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted platform of unknown type.
     `https://git.example.net/user/project`,
-    `https://git.example.net/user/project.git`,
+    `https://git.example.net/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted platform of unknown type where the platform name, such as `gitlab` is in the project name.
     `https://git.example.net/user/gitlab`,
-    `https://git.example.net/user/gitlab.git`,
+    `https://git.example.net/user/gitlab.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net',
     project: `gitlab`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Self-hosted platform of unknown type where the platform name, such as `gitlab` is in the project name.
     `https://git.example.net/user/github`,
-    `https://git.example.net/user/github.git`,
+    `https://git.example.net/user/github.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net',
     project: `github`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
-    `https://git.example.net:8080/user/project.git`,
+    `https://git.example.net:8080/user/project.git`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'git.example.net:8080',
     project: `project`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // No TLD.
-    `https://github/user/project`,
+    `https://github/user/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -323,12 +323,12 @@ describe(`parse-repository-url`, () => {
 
     // Tar/Zip URLs accessed through GitHub.com's official API download endpoint.
     `https://api.github.com/repos/user/project/tarball`,
-    `https://api.github.com/repos/user/project/zipball`,
+    `https://api.github.com/repos/user/project/zipball`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'api.github.com',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -337,52 +337,52 @@ describe(`parse-repository-url`, () => {
 
     // Tar/Zip URLs accessed through GitHub.com's unofficial download endpoint (which gets redirected to from api.github.com requests).
     `https://codeload.github.com/user/project/legacy.zip`,
-    `https://codeload.github.com/user/project/legacy.tar.gz`,
+    `https://codeload.github.com/user/project/legacy.tar.gz`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'codeload.github.com',
     project: `project`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Username containing a dot and dash.
-    `my.user-name/project`,
+    `my.user-name/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: null,
     project: `project`,
     type: null,
-    user: `my.user-name`,
+    user: `my.user-name`
   })));
 
   [
     // Username containing a dot and dash.
-    `https://github.com/my.user-name/project`,
+    `https://github.com/my.user-name/project`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: 'github.com',
     project: `project`,
     type: `github`,
-    user: `my.user-name`,
+    user: `my.user-name`
   })));
 
   [
     // Project containing a dot and dash.
-    `user/project.dot-dash`,
+    `user/project.dot-dash`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: null,
     project: `project.dot-dash`,
     type: null,
-    user: `user`,
+    user: `user`
   })));
 
   [
     // Project containing a dot and dash.
-    `https://github.com/user/project.dot-dash`,
+    `https://github.com/user/project.dot-dash`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `github.com`,
     project: `project.dot-dash`,
     type: `github`,
-    user: `user`,
+    user: `user`
   })));
 
   [
@@ -408,8 +408,8 @@ describe(`parse-repository-url`, () => {
     `https://git.example.com/user/sub-group/project`,
     `https://git.example.net/user/sub-group/project`,
     `https://git.example.com/user/sub-group/project.git`,
-    `https://git.example.net/user/sub-group/project.git`,
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({user: `user/sub-group`, project: `project`})));
+    `https://git.example.net/user/sub-group/project.git`
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({ user: `user/sub-group`, project: `project` })));
 
   [
     // GitLab with multiple sub-groups.
@@ -434,53 +434,53 @@ describe(`parse-repository-url`, () => {
     `https://git.example.com/user/sub-group1/sub-group2/project`,
     `https://git.example.net/user/sub-group1/sub-group2/project`,
     `https://git.example.com/user/sub-group1/sub-group2/project.git`,
-    `https://git.example.net/user/sub-group1/sub-group2/project.git`,
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({user: `user/sub-group1/sub-group2`, project: `project`})));
+    `https://git.example.net/user/sub-group1/sub-group2/project.git`
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({ user: `user/sub-group1/sub-group2`, project: `project` })));
 
   [
     // Invalid URLs.
     `https://github.com`,
-    `https://github.com/user`,
+    `https://github.com/user`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `github.com`,
     project: null,
     type: `github`,
-    user: null,
+    user: null
   })));
 
   [
-    `https://github/com`,
+    `https://github/com`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `github`,
     project: null,
     type: `github`,
-    user: null,
+    user: null
   })));
 
   [
-    `https://api.github.com`,
+    `https://api.github.com`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `api.github.com`,
     project: null,
     type: `github`,
-    user: null,
+    user: null
   })));
 
   [
-    `https://codeload.github.com`,
+    `https://codeload.github.com`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `codeload.github.com`,
     project: null,
     type: `github`,
-    user: null,
+    user: null
   })));
 
   [
-    `https://somewhere`,
+    `https://somewhere`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `somewhere`,
     project: null,
     type: null,
-    user: null,
+    user: null
   })));
 });

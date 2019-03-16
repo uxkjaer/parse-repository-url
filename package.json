@@ -26,18 +26,18 @@
     "url": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url.git"
   },
   "scripts": {
-    "test": "eslint src/ && nyc mocha --opts mocha.opts src/**/*.spec.js"
+    "test": "semistandard 'src/**/*.js' && nyc mocha --opts mocha.opts src/**/*.spec.js"
   },
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "semistandard": "^13.0.1"
+  },
   "devDependencies": {
     "@hutson/conventional-changelog-config": "^2.0.0",
-    "@hutson/eslint-config": "^3.0.0",
     "@hutson/nyc-config": "^2.0.0",
     "chai": "^4.2.0",
     "codecov": "^3.1.0",
     "debug": "^4.1.0",
-    "eslint": "^5.7.0",
     "mocha": "^5.2.0",
     "npm-publish-git-tag": "^3.0.0",
     "nyc": "^13.1.0",
