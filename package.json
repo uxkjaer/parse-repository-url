@@ -29,9 +29,7 @@
     "test": "semistandard 'src/**/*.js' && nyc mocha --opts mocha.opts src/**/*.spec.js"
   },
   "version": "1.0.0",
-  "dependencies": {
-    "semistandard": "^13.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@hutson/conventional-changelog-config": "^2.0.0",
     "@hutson/nyc-config": "^2.0.0",
@@ -41,6 +39,7 @@
     "mocha": "^5.2.0",
     "npm-publish-git-tag": "^3.0.0",
     "nyc": "^13.1.0",
-    "semantic-release-gitlab": "^7.0.10"
+    "semantic-release-gitlab": "^7.0.10",
+    "semistandard": "^13.0.1"
   }
 }
