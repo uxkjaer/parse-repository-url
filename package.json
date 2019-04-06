@@ -21,6 +21,16 @@
   "license": "Apache-2.0",
   "main": "src/index.js",
   "name": "@hutson/parse-repository-url",
+  "renovate": {
+    "extends": [
+      "config:base",
+      ":maintainLockFilesWeekly",
+      ":rebaseStalePrs",
+      ":automergeDigest",
+      ":gitSignOff",
+      ":automergeMinor"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url.git"
