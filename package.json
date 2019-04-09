@@ -28,6 +28,17 @@
     "reporter": "progress"
   },
   "name": "@hutson/parse-repository-url",
+  "nyc": {
+    "all": true,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/cli.js",
+      "src/**/*.spec.js",
+      "src/**/*.mock.js"
+    ]
+  },
   "renovate": {
     "extends": [
       "config:base",
@@ -50,7 +61,6 @@
   "dependencies": {},
   "devDependencies": {
     "@hutson/conventional-changelog-config": "^2.0.0",
-    "@hutson/nyc-config": "^2.0.0",
     "chai": "^4.2.0",
     "codecov": "^3.1.0",
     "debug": "^4.1.0",
