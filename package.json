@@ -30,13 +30,17 @@
   "name": "@hutson/parse-repository-url",
   "nyc": {
     "all": true,
-    "include": [
-      "src/**/*.js"
-    ],
     "exclude": [
       "src/cli.js",
       "src/**/*.spec.js",
       "src/**/*.mock.js"
+    ],
+    "include": [
+      "src/**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
     ]
   },
   "renovate": {
