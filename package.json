@@ -68,7 +68,6 @@
     "chai": "^4.2.0",
     "debug": "^4.1.0",
     "mocha": "^6.0.0",
-    "npm-publish-git-tag": "^3.0.0",
     "nyc": "^13.1.0",
     "semantic-release-gitlab": "^7.0.10",
     "semistandard": "^13.0.1"
