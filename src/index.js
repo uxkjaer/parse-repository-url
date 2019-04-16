@@ -34,15 +34,15 @@ module.exports = url => {
   return format(URL_PATTERNS.exec(parsedURL.pathname) || []);
 };
 
-function getType (parsedURL) {
-  if (typeof parsedURL.host !== `string`) {
+function getType ({ host }) {
+  if (typeof host !== `string`) {
     return null;
   }
 
-  if (parsedURL.host.indexOf(`github`) !== -1) {
+  if (host.indexOf(`github`) !== -1) {
     return 'github';
   }
-  if (parsedURL.host.indexOf(`gitlab`) !== -1) {
+  if (host.indexOf(`gitlab`) !== -1) {
     return 'gitlab';
   }
 

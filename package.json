@@ -8,7 +8,7 @@
   "bugs": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url/issues",
   "description": "Parse repository URLs to extract, SCM platform, domain, user, and project information.",
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=8.9.0"
   },
   "files": [
     "src/**/!(*.spec).js"
@@ -69,7 +69,7 @@
     "debug": "^4.1.0",
     "mocha": "^6.0.0",
     "nyc": "^13.1.0",
-    "semantic-release-gitlab": "^7.0.10",
+    "semantic-release-gitlab": "^8.0.1",
     "semistandard": "^13.0.1"
   }
 }

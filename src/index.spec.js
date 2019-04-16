@@ -458,7 +458,8 @@ describe(`parse-repository-url`, () => {
   })));
 
   [
-    `https://api.github.com`
+    `https://api.github.com`,
+    `https://api.GitHub.com`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `api.github.com`,
     project: null,
@@ -467,7 +468,8 @@ describe(`parse-repository-url`, () => {
   })));
 
   [
-    `https://codeload.github.com`
+    `https://codeload.github.com`,
+    `https://codeload.GitHub.com`
   ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
     domain: `codeload.github.com`,
     project: null,
