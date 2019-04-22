@@ -68,6 +68,12 @@ parseRepositoryURL(`https://somewhere`);
 
 Check out the `index.spec.js` file under the `src/` directory for a full list of URLs that can be parsed for GitLab, GitHub, including hosted, on-premise, and multiple sub-groups.
 
+## Professional Support
+
+[Professional support for `@hutson/semantic-delivery-gitlab` is available with a Tidelift Subscription](https://tidelift.com/subscription/pkg/npm--hutson-parse-repository-url?utm_source=npm--hutson-parse-repository-url&utm_medium=referral&utm_campaign=readme).
+
+Tidelift helps make open source sustainable for maintainers while giving companies assurances about security, maintenance, and licensing for their dependencies.
+
 ## Debugging
 
 To assist users of `@hutson/parse-repository-url` with debugging the behavior of this module we use the [debug](https://www.npmjs.com/package/debug) utility package to print information about the publish process to the console. To enable debug message printing, the environment variable `DEBUG`, which is the variable used by the `debug` package, must be set to a value configured by the package containing the debug messages to be printed.
