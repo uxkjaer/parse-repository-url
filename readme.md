@@ -14,6 +14,8 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Security Disclosure Policy](#security-disclosure-policy)
+- [Professional Support](#professional-support)
 - [Debugging](#debugging)
 - [Node Support Policy](#node-support-policy)
 - [Contributing](#contributing)
