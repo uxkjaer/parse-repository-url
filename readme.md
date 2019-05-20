@@ -76,7 +76,7 @@ To report a security vulnerability in this package, or one of it's dependencies,
 
 ## Professional Support
 
-[Professional support for `@hutson/parse-repository-url` is available with a Tidelift Subscription](https://tidelift.com/subscription/pkg/npm--hutson-parse-repository-url?utm_source=npm--hutson-parse-repository-url&utm_medium=referral&utm_campaign=readme).
+[Professional support for `@hutson/parse-repository-url` is available with a Tidelift Subscription](https://tidelift.com/subscription/pkg/npm-hutson-parse-repository-url?utm_source=npm--hutson-parse-repository-url&utm_medium=referral&utm_campaign=readme).
 
 Tidelift helps make open source sustainable for maintainers while giving companies assurances about security, maintenance, and licensing for their dependencies.
 
