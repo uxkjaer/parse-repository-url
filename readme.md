@@ -43,28 +43,42 @@ yarn add [--dev] @hutson/parse-repository-url
 ## Usage
 
 ```javascript
-const parseRepositoryURL = require(`@hutson/parse-github-repository`);
+const parseRepositoryURL = require(`@hutson/parse-repository-url`);
 
-// {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
-parseRepositoryURL(`https://gitlab.com/hyper-expanse/open-source/parse-repository-url`);
-
-// {domain: `git.example.com`, project: `parse-repository-url`, type: null, user: `hyper-expanse/open-source`}
-parseRepositoryURL(`https://git.example.com/hyper-expanse/open-source/parse-repository-url`);
-
-// {domain: `gitlab.com`, project: `parse-repository-url`, type: `gitlab`, user: `hyper-expanse/open-source`}
-const repository = parseRepositoryURL(`git@gitlab.com/hyper-expanse/open-source/parse-repository-url`);
-repository.browse(); // https://gitlab.com/hyper-expanse/open-source/parse-repository-url
-
-// {domain: `github.com`, project: `project`, type: `github`, user: `user`}
+/*{
+  browse: [Function],
+  domain: 'github.com',
+  project: 'project',
+  type: 'github',
+  user: 'user'
+}*/
 parseRepositoryURL(`https://github.com/user/project`);
 
-// {domain: `git.example.com`, project: `project`, type: null, user: `user`}
+/*{
+  browse: [Function],
+  domain: 'git.example.com',
+  project: 'project',
+  type: null,
+  user: 'user'
+}*/
 parseRepositoryURL(`https://git.example.com/user/project`);
 
-// {domain: `github.com`, project: `project`, type: `github`, user: `user`}
-parseRepositoryURL(`git@github.com/user/project`);
+/*{
+  browse: [Function],
+  domain: 'github.com',
+  project: 'project',
+  type: 'github',
+  user: 'user'
+}*/
+parseRepositoryURL(`git@github.com:user/project`);
 
-// {domain: `somewhere`, project: null, type: null, user: null}
+/*{
+  browse: [Function],
+  domain: 'somewhere',
+  project: null,
+  type: null,
+  user: null
+}*/
 parseRepositoryURL(`https://somewhere`);
 ```
 
@@ -113,4 +127,4 @@ JavaScript package managers should allow you to install this package with any ve
 
 ## Contributing
 
-Please read our [contributing guide](https://gitlab.com/hyper-expanse/open-source/parse-repository-url/blob/master/CONTRIBUTING.md) to see how you may contribute to this project.
+Please read our [contributing guide](https://github.com/hyper-expanse/parse-repository-url/blob/master/CONTRIBUTING.md) to see how you may contribute to this project.

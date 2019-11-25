@@ -2,10 +2,10 @@
   "author": {
     "name": "Hutson Betts",
     "email": "hutson@hyper-expanse.net",
-    "url": "https://gitlab.com/hutson"
+    "url": "https://hyper-expanse.net/hutson"
   },
   "bin": {},
-  "bugs": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url/issues",
+  "bugs": "https://github.com/hyper-expanse/parse-repository-url/issues",
   "description": "Parse repository URLs to extract, SCM platform, domain, user, and project information.",
   "engines": {
     "node": ">=8.9.0"
@@ -13,7 +13,7 @@
   "files": [
     "src/**/!(*.spec).js"
   ],
-  "homepage": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url#readme",
+  "homepage": "https://github.com/hyper-expanse/parse-repository-url#readme",
   "keywords": [
     "parser",
     "repository-url"
@@ -43,23 +43,9 @@
       "text"
     ]
   },
-  "renovate": {
-    "extends": [
-      "config:base",
-      ":maintainLockFilesWeekly",
-      ":rebaseStalePrs",
-      ":automergeDigest",
-      ":gitSignOff",
-      ":automergeMinor",
-      ":preserveSemverRanges"
-    ],
-    "docker": {
-      "pinDigests": true
-    }
-  },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/hyper-expanse/open-source/parse-repository-url.git"
+    "url": "https://github.com/hyper-expanse/parse-repository-url.git"
   },
   "scripts": {
     "test": "semistandard 'src/**/*.js' && nyc mocha src/**/*.spec.js"
