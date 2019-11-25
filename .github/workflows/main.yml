@@ -4,7 +4,6 @@ on:
     branches:
       - '**'
 jobs:
-  runs-on: ubuntu-18.04
   node-8:
     container: node:8
     steps:
