@@ -5,6 +5,7 @@ on:
       - '**'
 jobs:
   node-8:
+    runs-on: ubuntu-18.04
     container: node:8
     steps:
       - uses: actions/checkout@v1.2.0
@@ -19,6 +20,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
   node-10:
+    runs-on: ubuntu-18.04
     container: node:10
     steps:
       - uses: actions/checkout@v1.2.0
@@ -33,6 +35,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
   node-12:
+    runs-on: ubuntu-18.04
     container: node:12
     steps:
       - uses: actions/checkout@v1.2.0
@@ -47,6 +50,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
   node-latest:
+    runs-on: ubuntu-18.04
     container: node:latest
     steps:
       - uses: actions/checkout@v1.2.0
