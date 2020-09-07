@@ -2,8 +2,13 @@
 
 /* eslint-disable no-unused-expressions */
 
-const { expect } = require('chai');
-const { describe, it } = require('mocha');
+const {
+  expect
+} = require('chai');
+const {
+  describe,
+  it
+} = require('mocha');
 
 const parseRepositoryURL = require('../');
 
@@ -409,7 +414,10 @@ describe('parse-repository-url', () => {
     'https://git.example.net/user/sub-group/project',
     'https://git.example.com/user/sub-group/project.git',
     'https://git.example.net/user/sub-group/project.git'
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({ user: 'user/sub-group', project: 'project' })));
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
+    user: 'user/sub-group',
+    project: 'project'
+  })));
 
   [
     // GitLab with multiple sub-groups.
@@ -435,7 +443,10 @@ describe('parse-repository-url', () => {
     'https://git.example.net/user/sub-group1/sub-group2/project',
     'https://git.example.com/user/sub-group1/sub-group2/project.git',
     'https://git.example.net/user/sub-group1/sub-group2/project.git'
-  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({ user: 'user/sub-group1/sub-group2', project: 'project' })));
+  ].forEach(url => it(url, () => expect(parseRepositoryURL(url)).to.contain({
+    user: 'user/sub-group1/sub-group2',
+    project: 'project'
+  })));
 
   [
     // Invalid URLs.
@@ -485,4 +496,38 @@ describe('parse-repository-url', () => {
     type: null,
     user: null
   })));
+
+  [{
+    url: 'https://gitlab.example.com/sub-group1/sub-group2/project1',
+    format: "{{domain}}/{{group}}/{{group}}/{{project}}"
+  }].forEach(oRepo => it("Should format the url with two groups", () => expect(parseRepositoryURL(oRepo.url, oRepo.format)).to.contain({
+    group: 'sub-group1/sub-group2',
+    project: 'project1'
+  })));
+
+  [{
+    url: 'https://gitlab.example.com/user1/sub-group1/project1',
+    format: "{{domain}}/{{user}}/{{group}}/{{project}}"
+  }].forEach(oRepo => it("Should format the url with one group and a user", () => expect(parseRepositoryURL(oRepo.url, oRepo.format)).to.contain({
+    user: 'user1',
+    group: 'sub-group1',
+    project: 'project1'
+  })));
+
+  [{
+    url: 'https://gitlab.example.com/user1/project1',
+    format: "{{domain}}/{{user}}/{{project}}"
+  }].forEach(oRepo => it("Should format the url with a user, but no group", () => expect(parseRepositoryURL(oRepo.url, oRepo.format)).to.contain({
+    user: 'user1',
+    project: 'project1'
+  })));
+
+  [{
+    url: 'https://gitlab.example.com/sub-group1/sub-group2/project1',
+    format: "{{domain}}/group1/{{group}}/{{project}}"
+  }].forEach(oRepo => it("Should format the url with only one group", () => expect(parseRepositoryURL(oRepo.url, oRepo.format)).to.contain({
+    group: 'sub-group2',
+    project: 'project1'
+  })));
+
 });

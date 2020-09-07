@@ -11,14 +11,16 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Security Disclosure Policy](#security-disclosure-policy)
-- [Professional Support](#professional-support)
-- [Debugging](#debugging)
-- [Node Support Policy](#node-support-policy)
-- [Contributing](#contributing)
+- [@hutson/parse-repository-url](#hutsonparse-repository-url)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Security Disclosure Policy](#security-disclosure-policy)
+  - [Enterprise Support](#enterprise-support)
+  - [Debugging](#debugging)
+  - [Node Support Policy](#node-support-policy)
+  - [Contributing](#contributing)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -29,6 +31,7 @@ Occasionally you need to take a Git repository URL, such as `https://gitlab.com/
 * [x] Return `project` property.
 * [x] Return `type` property indicating the SCM host, such as `github` or `gitlab`.
 * [x] Return `user` property.
+* [x] Return an object described by a predefined format.
 
 > **Note:* Returns `null` for any property where the information could not be extracted from the repository URL.
 
@@ -80,6 +83,43 @@ parseRepositoryURL(`git@github.com:user/project`);
   user: null
 }*/
 parseRepositoryURL(`https://somewhere`);
+
+/*{
+  browse: [Function],
+  domain: 'gitlab.example.com',
+  project: project1,
+  type: null,
+  user: user,
+  group: sub-group1
+}*/
+parseRepositoryURL({
+    url: 'https://gitlab.example.com/user1/sub-group1/project1',
+    format: "{{domain}}/{{user}}/{{group}}/{{project}}"
+  });
+
+  /*{
+  browse: [Function],
+  domain: 'gitlab.example.com',
+  project: project1,
+  type: null,
+  group: sub-group1/sub-group2
+}*/
+parseRepositoryURL({
+    url: 'https://gitlab.example.com/sub-group1/sub-group2/project1',
+    format: "{{domain}}/{{group}}/{{group}}/{{project}}"
+  });
+
+    /*{
+  browse: [Function],
+  domain: 'gitlab.example.com',
+  project: project1,
+  type: null,
+  group: sub-group1
+}*/
+parseRepositoryURL({
+    url: 'https://gitlab.example.com/sub-group1/sub-group2/project1',
+    format: "{{domain}}/{{group}}/{{project}}"
+  });
 ```
 
 Check out the `index.spec.js` file under the `src/` directory for a full list of URLs that can be parsed for GitLab, GitHub, including hosted, on-premise, and multiple sub-groups.
